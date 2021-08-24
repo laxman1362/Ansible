@@ -1,0 +1,29 @@
+#playbook to create heat stack
+
+heat_template_version: 2015-04-30
+resources:
+  test_vm:
+   properties:
+     flavor: Flavourname
+	 image: image_id
+	 name: test_vm1
+	 networks:
+	          { get_resource: management_port }
+   type: OS::Nova::Server
+  test_volume:
+    properties:
+	  name: test_volume
+	  size: 5
+	type: OS::Cinder::Volume
+  test_volume_attach:
+    properties:
+	  instance_uuid:
+	    get_resource: test_vm
+	  volume_id:
+	    get_resource: test_volume
+	type: OS::Cinder::Volumeattachment
+  management_port:
+    type:OS::Neutron::Port
+	properties:
+	   name: test_vm
+	   network_id: network_id
