@@ -1,0 +1,56 @@
+- name: restart nova-compute on compute node
+  hosts: compute_host
+  gather_facts: false
+  become: yes
+  tasks
+  
+    - name: restart nova-compute
+	  service:
+	          name: nova-compute
+			  state: restarted
+			  
+- name: Restart nova services on controller node
+  hosts: controller_host
+  become: yes
+  gather_facts: false
+  tasks:
+
+    - name: restart all nova services on controller node
+	  service:
+	          name: nova-api
+			  state: restarted
+			  
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-scheduler
+			  state: restarted
+			  
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-conductor
+			  state: restarted
+			  
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-scheduler
+			  state: restarted
+			  
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-conductor
+			  state: restarted
+	
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-novncproxy
+			  state: restarted
+	
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-consoleauth
+			  state: restarted
+	
+	- name: restart all nova services on controller node
+	  service:
+	          name: nova-cert
+			  state: restarted
