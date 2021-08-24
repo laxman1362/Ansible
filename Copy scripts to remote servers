@@ -1,0 +1,14 @@
+#playbook to copy files to remote servers
+
+- name: Copy files from local to remote servers
+  hosts: remote_host
+  tasks:
+    - name: Copying the files to remote hosts
+	  become: yes
+	  copy:
+	    src: <source path>
+		dest: <destination path>
+		mode: '0755' #permissions to file in destination
+	  with_items:
+	  - filename1.txt
+	  - filename1.txt
